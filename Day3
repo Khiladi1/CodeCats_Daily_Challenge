@@ -1,0 +1,68 @@
+2215. Find the Difference of Two Arrays
+
+-> class Solution {
+public:
+    vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+        vector< vector<int> > res;
+        set<int> arr1,arr2;
+            vector<int> temp;
+
+            for(auto it: nums1){
+                arr1.emplace(it);
+            }
+
+            for(auto it: nums2){
+                arr2.emplace(it);
+            }
+
+            for(auto it: arr1){
+                if(arr2.count(it)){
+
+                }
+                else
+                temp.push_back(it);
+
+            }
+            res.push_back(temp);
+            temp.clear();
+
+            for(auto it: arr2){
+                if(arr1.count(it)){
+
+                }
+                else
+                temp.push_back(it);
+
+            }
+            res.push_back(temp);
+
+            return res;
+
+
+
+    }
+};
+
+
+
+238. Product of Array Except Self
+
+-> class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>ans(n,1);
+        int p=1;
+        int s=1;
+        for(int i=0;i<n;i++){
+            ans[i]*=p;
+            p*=nums[i];
+        }
+        for(int i=n-1;i>=0;i--){
+            ans[i]*=s;
+            s*=nums[i];
+        }
+        return ans;
+        
+    }
+};
