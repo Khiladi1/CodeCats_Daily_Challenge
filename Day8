@@ -45,22 +45,18 @@ public:
 ->    class Solution {
 public:
     vector<int> intersection(vector<vector<int>>& nums) {
-
-             unordered_map<int,int> map;
-        for(auto &arr: nums) {
-            for(auto &num: arr) {
-                map[num]++;
+    map<int,int> m;
+        for(auto vec : nums) {
+            for(auto num : vec) {
+                m[num]++;
             }
         }
-        int n=nums.size();
-        vector<int> res;
-        for(auto &it: map) {
-            if(it.second==n) {
-                res.push_back(it.first);
-            }
+        int s=nums.size();
+        vector<int> ans;
+        for(auto it : m) {
+            if(it.second==s) ans.push_back(it.first);
         }
-        sort(res.begin(), res.end());
-        return res;
+        return ans;
         
     }
 };
