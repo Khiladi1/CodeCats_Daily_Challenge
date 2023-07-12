@@ -1,0 +1,73 @@
+2000. Reverse Prefix of Word
+
+->  class Solution {
+public:
+    string reversePrefix(string word, char ch) {
+    //    if(find(word.begin(),word.end(),ch) != word.end())
+    //     reverse(word.begin(),find(word.begin(),word.end(),ch)+1);
+    //     return word;
+        int pos=-1;
+       for(int i=0;i<word.length();i++){
+           if(word[i] == ch){
+           pos=i;
+           break;
+           }
+       }
+
+         int i=0,j=pos;
+        if(pos){
+            while(i<=j){
+                char temp = word[i];
+                word[i]=word[j];
+                word[j]=temp;
+                i++;
+                j--;
+            }
+            
+        }
+        return word;
+
+
+    }
+};
+
+
+
+
+
+1436. Destination City
+
+->  class Solution {
+public:
+  string destCity(vector<vector<string>>& paths) {
+        // unordered_map<string, string> m;
+        // for(auto e: paths)     m[e[0]] = e[1];
+        // string cur(paths[0][0]);
+        // while(m.count(cur))
+        //     cur = m[cur];
+        // return cur;
+
+        // unordered_set<string> st;
+		// for(int i = 0; i < paths.size(); i++)
+		// 	st.insert(paths[i][0]);
+
+		// for(int i = 0; i < paths.size(); i++)
+		// {
+		// 	if(st.find(paths[i][1]) == st.end())
+		// 		return paths[i][1];
+		// }
+    
+        //      return "";
+
+
+        vector<string> str;
+        for(int i=0;i<paths.size();i++)
+            str.push_back(paths[i][0]);
+        for(int i=0;i<paths.size();i++){
+            if(!(find(str.begin(),str.end(),paths[i][1])!=str.end())){
+                return paths[i][1];
+            }
+        }
+        return "";
+    }
+};
