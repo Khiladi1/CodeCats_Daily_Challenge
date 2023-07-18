@@ -1,0 +1,71 @@
+206. Reverse Linked List
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        // ListNode *prev=NULL, *nxt=NULL;
+	
+      	// while(head!=NULL)
+      	// {
+	      // 	nxt=head->next;
+	      // 	head->next=prev;
+	      // 	prev=head;
+	      // 	head=nxt;
+        // }
+	    	// return prev;
+
+
+				 if(head == NULL || head->next == NULL) return head;
+        ListNode* prev = NULL;
+        ListNode* h2 = reverseList(head->next);
+        head->next->next = head;
+        head->next=prev;
+        return h2;
+        
+    }
+};
+
+
+
+
+1290. Convert Binary Number in a Linked List to Integer
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        int num=0,len=-1;
+        ListNode *ptr=head;
+        while(ptr){
+            len++;
+            ptr=ptr->next;
+        }
+        ListNode *ptr1=head;
+        while(ptr1){
+            num+=(pow(2,len)*ptr1->val);
+            len--;
+            ptr1=ptr1->next;
+        }
+        return num;
+    }
+};
