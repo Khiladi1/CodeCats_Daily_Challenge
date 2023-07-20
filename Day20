@@ -1,0 +1,117 @@
+205. Isomorphic Strings
+
+->class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        map<char,char> mp,mp2;
+        for(int i=0;i<s.size();i++){
+            if(mp[s[i]] && mp[s[i]]!=t[i])  return false;
+            if(mp2[t[i]] && mp2[t[i]]!=s[i]) return false;
+            mp[s[i]] = t[i];
+            mp2[t[i]] = s[i];
+        }
+        return true;
+        
+    }
+};
+
+
+
+
+
+17. Letter Combinations of a Phone Number
+
+
+class Solution {
+public:
+    void generateCombos(int idx, string& digits, string& temp, vector<string>& sol, vector<string>& charMap){
+        if(idx==digits.length()){
+            if(temp.length()) sol.push_back(temp);
+            return;
+        }
+
+        int num=digits[idx]-'0';
+        string str=charMap[num];
+
+        for(int i=0;i<str.length();i++){
+            temp.push_back(str[i]);
+            generateCombos(idx+1, digits, temp, sol, charMap);
+            temp.pop_back();
+        }
+    }
+
+    vector<string> letterCombinations(string digits) {
+        string temp;
+        vector<string> sol;
+        vector<string> charMap={"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+        generateCombos(0, digits, temp, sol, charMap);
+        return sol;
+    }
+};
+
+
+
+
+
+83. Remove Duplicates from Sorted List
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+    //   set<int>v;
+    //     while(head){
+    //         v.insert(head->val);
+    //         head=head->next;
+    //     }
+    //     ListNode* root=NULL;
+    //     for(auto it=v.rbegin(); it!=v.rend(); it++){
+    //         ListNode* temp=new ListNode;
+    //         temp->val=*it;
+    //         temp->next=root;
+    //         root=temp;
+    //     }
+    //     return root;
+
+
+    if(head == NULL || head -> next == NULL)
+        return head;
+
+        ListNode* curr = head -> next;
+        ListNode* prev = head;
+        ListNode* next = curr -> next;
+
+        while(curr != NULL)
+        {
+            if(prev -> val == curr -> val)
+            {
+                prev -> next = next;
+                curr -> next = NULL;
+                delete(curr);
+                curr = next;
+                if(next != NULL)
+                next = curr -> next;
+            }
+            else
+            {
+                prev = curr;
+                curr = next;
+                if(next != NULL)
+                next = curr -> next;
+            }
+        }
+        return head;
+
+        
+    }
+};
