@@ -1,0 +1,105 @@
+2697. Lexicographically Smallest Palindrome
+
+
+class Solution {
+public:
+    string makeSmallestPalindrome(string s) {
+        int l=0,r=s.size()-1;
+        while(l<=r){
+            if(s[l] != s[r]){
+                char c= min(s[r],s[l]);
+                s[r]=s[l]=c;
+            }
+            l++;
+            r--;
+        }
+        return s;
+        
+    }
+};
+
+
+
+
+
+
+143. Reorder List
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        vector<ListNode*> l;
+        ListNode *ptr = head;
+        
+        while(ptr){
+            l.push_back(ptr);
+            ptr=ptr->next;
+        }
+
+        
+        int i=0,j=l.size()-1;
+        head=l[i];
+        head->next=l[j];
+        i++;
+        ptr=head->next;
+        while(i<j){
+            ptr->next=l[i];
+            ptr=ptr->next;
+            j--;
+            ptr->next=l[j];
+            ptr=ptr->next;
+            i++;
+        }
+
+        ptr->next=nullptr;
+        
+    }
+};
+
+
+
+
+
+1392. Longest Happy Prefix
+
+
+class Solution {
+public:
+    string longestPrefix(string s) {
+        int n = s.size();
+        vector<int>prefix(n, 0);
+        int i = 0, j = 1;
+        while(j < n){
+            if(s[i] == s[j]){
+                prefix[j] = i + 1;
+                i++;
+                j++;
+            }
+            else{
+                if(i == 0){
+                    j++;
+                }
+                else{
+                    i = prefix[i - 1];
+                }
+            }
+        }
+        return s.substr(0, i);
+    }
+};
+
+
+
+
+
