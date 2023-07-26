@@ -1,0 +1,92 @@
+21. Merge Two Sorted Lists
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode *p1=list1, *p2=list2;
+        ListNode *dummy= new ListNode(-1);
+        ListNode * ptr=dummy;
+
+        if(!p1) return p2;
+        if(!p2) return p1;
+
+        while(p1 && p2){
+
+            if(p1->val < p2->val){
+                ptr->next=p1;
+              //  ptr=ptr->next;
+                p1=p1->next;
+            }
+            else{
+                ptr->next=p2;
+              //  ptr=ptr->next;
+                p2=p2->next;
+            }
+            ptr=ptr->next;
+            
+        }
+
+        while(p1){
+                   ptr->next=p1;
+                ptr=ptr->next;
+                p1=p1->next;
+            }
+            while(p2){
+                   ptr->next=p2;
+                ptr=ptr->next;
+                p2=p2->next;
+            }
+        return dummy->next;
+        
+    }
+};
+
+
+
+
+
+
+19. Remove Nth Node From End of List
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *s = head, *f = head;
+    
+        for(int i=0;i<n;i++)
+        f=f->next;
+
+       if(!f) return head->next;
+
+        while(f->next){
+            f=f->next ; s=s->next;
+        }
+
+        s->next=s->next->next;
+        
+    
+
+    return head;
+    }
+};
