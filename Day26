@@ -1,0 +1,116 @@
+142. Linked List Cycle II
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        
+            ListNode *f = head, *s = head;
+            if(!head) return NULL;
+        while(f && f->next){
+            f=f->next->next;
+            s=s->next;
+
+            if(s == f)
+            {
+                while(s!=head){
+                    s=s->next;
+                    head=head->next;
+                }
+                return s;
+            }
+        }
+        return NULL;
+    }
+};
+
+
+
+
+
+
+
+86. Partition List
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        // ListNode *ptr=head;
+        // int count=0,low=0;
+        // while(ptr){
+        //     count++;
+        //     if(ptr->val<x)
+        //     low++;
+        //     ptr=ptr->next;
+        // }
+        // vector<int> v(count);
+        
+        // ptr=head;
+        // int i=0,j=low;
+        // while(ptr){
+        // if(ptr->val<x){
+        //     v[i]=ptr->val;
+        //     i++;
+        // }    
+        // else{
+        //     v[j]=ptr->val;
+        //     j++;
+        // }
+        // ptr=ptr->next;
+        // }
+
+        // i=0;
+        // ptr=head;
+        // while(i<v.size()){
+        //     ptr->val=v[i];
+        //     i++;
+        //     ptr=ptr->next;
+        // }
+        // return head;
+
+        ListNode* small = new ListNode(-1);
+        ListNode* large = new ListNode(-1);
+        ListNode* smallptr=small;
+        ListNode* largeptr=large;
+
+        while(head){
+            if(head->val<x){
+                small->next=head;
+                small=small->next;
+                head=head->next;
+                small->next=NULL;
+                
+            }
+            else{
+                large->next=head;
+                large=large->next;
+                head=head->next;
+                large->next=NULL;
+            }
+            
+        }
+        small->next=largeptr->next;
+
+        return smallptr->next;
+
+
+    }
+};
