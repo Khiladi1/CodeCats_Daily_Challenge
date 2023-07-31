@@ -1,0 +1,131 @@
+merge sort
+
+void merge(vector<int> &arr, int p, int q, int r){
+    int n1= q-p+1;
+    int n2=r-q;
+    int arr1[n1];
+    int arr2[n2];
+
+    for(int i=0;i<n1;i++)
+    arr1[i]=arr[p+i];
+    
+    for(int j=0;j<n2;j++)
+    arr2[j]=arr[q+j+1];
+
+    int i=0,j=0,k=p;
+
+    while(i<n1 & j<n2){
+        if(arr1[i]<arr2[j]){
+        arr[k]=arr1[i];
+        k++;
+        i++;
+        }
+        else{
+        arr[k]=arr1[j];
+        k++;
+        j++;
+        }
+    }
+    while(i<n1){
+        arr[k]=arr1[i];
+        i++;
+        k++;
+    }
+    while(j<n2){
+        arr[k]=arr2[j];
+        j++;
+        k++;
+    }
+
+}
+void mergesort(vector<int> &arr, int p, int r){
+    if(p>=r)
+    return;
+    int q= p+(r-p)/2;
+    mergesort(arr, p, q);
+    mergesort(arr, q+1,r);
+    merge(arr, p, q, r);
+}
+void mergeSort(vector < int > & arr, int n) {
+    // Write your code here.
+    return mergesort(arr,0,n-1);
+}
+
+
+
+
+quick sort
+
+
+#include <bits/stdc++.h> 
+int partition(vector<int> &arr, int p, int r){
+    int x=arr[r];
+   int i=p-1;
+    for(int j=p;j<=r-1;j++){
+        if(arr[j]<=x){
+            i++;
+            swap(arr[i],arr[j]);
+        }
+    }
+    swap(arr[i+1],arr[r]);
+    return i+1;
+}
+void quicksort(vector<int> &arr, int p, int r){
+    if(p<r){
+       int q= partition( arr, p, r);
+        quicksort(arr,p,q-1);
+        quicksort(arr,q+1,r);
+
+    }
+}
+vector<int> quickSort(vector<int> arr)
+{
+    // Write your code here.
+    quicksort(arr, 0,arr.size()-1);
+    return arr;
+}
+
+
+
+
+heap sort
+
+
+#include <bits/stdc++.h> 
+void heapify(vector<int>& arr, int n,int i){
+	if(i>=n)
+	return;
+	int largest =i;
+	int l=2*i+1;
+	int r=2*i+2;
+
+	if(l<n && arr[l]>arr[largest])
+	largest=l;
+	if(r<n && arr[r]>arr[largest] )
+	largest=r;
+
+	if(largest!=i){
+	
+	swap(arr[i],arr[largest]);
+
+	heapify(arr,n,largest);
+	}
+
+}
+vector<int> heapSort(vector<int>& arr, int n) {
+	// Write your code here.
+	for(int i= (n/2-1);i>=0;i--){
+		heapify(arr,n,i);
+		}
+	
+ while(n != 0){
+		n--;
+
+		swap(arr[0], arr[n]);
+		heapify(arr, n, 0);
+    }
+	
+	return arr;
+}
+
+
