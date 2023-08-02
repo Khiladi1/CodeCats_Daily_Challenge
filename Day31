@@ -1,0 +1,71 @@
+49. Group Anagrams
+
+-> class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map< string,vector<string> > mp;
+
+        for(auto it: strs){
+            string word = it;
+            sort(word.begin(),word.end());
+            mp[word].push_back(it);
+        }
+
+        vector< vector<string> > ans;
+
+        for(auto x: mp){
+            ans.push_back(x.second);
+        }
+        return ans;
+        
+    }
+};
+
+
+
+
+75. Sort Colors
+
+
+->class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+  
+        int i=0,j=0,k=nums.size()-1;
+        while(j<=k){
+            if(nums[j]==0) {
+                swap(nums[i],nums[j]);
+                i++;
+                j++;
+            }else if(nums[j]==1){
+               
+                j++;
+            }else{
+                swap(nums[j],nums[k]);
+                
+                k--;
+            }
+        }
+
+        //  int arr[3]={0};
+        
+       
+        // for(int i=0;i<a.size();i++){
+        //     arr[a[i]]+=1;
+        // }
+        // int k=0;
+        
+        // for(int i=0;i<3;i++){
+        //     for(int j=0;j<arr[i];j++){
+        //         a[k]=i;
+        //         k++;
+        //     }
+        // }
+
+        // cout<<"[";
+        // for(int i=0;i<a.size();i++)
+        // cout<<a[i]<<",";
+        // cout<<"]";
+        
+    }
+};
