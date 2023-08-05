@@ -1,0 +1,57 @@
+50. Pow(x, n)
+
+
+class Solution {
+public:
+double power(double x, long long k){
+    if(k==1)
+    return x;
+    double a=power(x,k/2);
+    if(k&1)return a*x*a;
+    else return a*a;
+}
+    double myPow(double x, int n) {
+        if(n==0)
+        return 1;
+        long long k=long(abs(n));
+        double ans = power( x, k);
+        if(n<0)
+        return 1/ans;
+        else return ans;
+        
+    }
+};
+
+
+
+
+69. Sqrt(x)
+
+
+class Solution {
+public:
+    int mySqrt(int x) {
+
+        int s=0,e=x,ans;
+        long long int mid;
+        mid = (s+e)/2;
+        while(s<=e){
+
+            long long square = mid*mid;
+            if(square == x)
+            return mid;
+            else if(square < x){
+            ans=mid;
+            s= mid+1;
+            }
+            else 
+            e = mid-1;
+            mid=(s+e)/2;
+        }
+     
+
+       return ans;
+
+
+    }
+};
