@@ -1,0 +1,53 @@
+378. Kth Smallest Element in a Sorted Matrix
+
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int row=matrix.size();
+        int col=matrix[0].size();
+
+        int low=matrix[0][0], high=matrix[row-1][col-1];
+
+        while(low<=high){
+            int mid=(low+high)/2;
+            int cnt=0;
+            for(int i=0;i<col;i++){
+                cnt+=upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
+            }
+
+            if(cnt<k)
+            low=mid+1;
+            else
+            high=mid-1;
+        }
+        return low;
+        
+    }
+};
+
+
+
+
+
+
+153. Find Minimum in Rotated Sorted Array
+
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int low = 0, high = nums.size()-1, ans = INT_MAX;
+        while(low<=high) {
+            int mid = (low+high)/2;
+            if(nums[low]<=nums[mid]) {
+                ans = min(ans, nums[low]);
+                low = mid+1;
+            } else {
+                ans = min(ans, nums[mid]);
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+};
