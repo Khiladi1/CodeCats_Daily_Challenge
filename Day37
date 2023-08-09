@@ -1,0 +1,95 @@
+1614. Maximum Nesting Depth of the Parentheses
+
+
+class Solution {
+public:
+    int maxDepth(string s) {
+         int maxi=0, count =0, i=0;
+
+        // while(i<s.size()){
+        //     if(s[i]=='(')
+        //     count++;
+        //     else if(s[i]==')'){
+        //         maxi=max(count, maxi);
+        //         count--;
+        //     }
+        //     i++;
+        // }
+        // return maxi;
+
+        stack<int> st;
+        for(auto i: s){
+
+            if(i=='('){
+                st.push(i);
+                count++;
+            }
+            else if(i==')'){
+                st.pop();
+                count=st.size();
+            }
+            if(count>maxi)
+            maxi = count;
+
+        }
+
+        return maxi;
+    }
+};
+
+
+
+
+
+1021. Remove Outermost Parentheses
+
+
+
+
+
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+        // int cnt = 0;
+        // string res;
+
+        // for (auto c: s) {
+        //     if (cnt == 0 && c == '(') cnt--;
+        //     else if (cnt == -1 && c == ')') cnt++;
+        //     else {
+        //         res.push_back(c);
+        //         if (c == '(') cnt--;
+        //         else cnt++;
+        //     }
+        // }
+
+        // return res;
+
+
+
+        string result;
+        stack <char> st;
+        for(int i:s)
+        {
+            if(i=='(')
+            {
+                if(!st.empty())
+                {
+                result.push_back(i);
+                }
+                st.push(i);
+            }
+            else{
+                st.pop();
+                if(!st.empty())
+                {
+                    result.push_back(i);
+                }
+            }
+            
+        }
+        return result;
+    }
+};
+
+
