@@ -1,0 +1,59 @@
+1472. Design Browser History
+
+
+class BrowserHistory {
+public:
+    list<string> history;
+    list<string> :: iterator it;
+    BrowserHistory(string homepage) {
+        history.push_back(homepage);
+        it=history.begin();
+    }
+    
+    void visit(string url) {
+        auto del=it;
+        del++;
+        history.erase(del,history.end());
+        history.push_back(url);
+        it++;
+    }
+    
+    string back(int steps) {
+        while(it!=history.begin() && steps--){
+            it--;
+        }
+        return *it;
+    }
+    
+    string forward(int steps) {
+        while(it!=(--history.end()) && steps--){
+            it++;
+        }
+        return *it;
+    }
+};
+
+
+
+
+
+901. Online Stock Span
+
+
+class StockSpanner {
+public:
+    stack<pair<int,int>> st;
+    StockSpanner() {
+        
+    }
+    
+    int next(int price) {
+        int span=1;
+        while(!st.empty() && st.top().first <= price){
+            span+=st.top().second;
+            st.pop();
+        } 
+        st.push({price,span});
+        return span;
+    }
+};
