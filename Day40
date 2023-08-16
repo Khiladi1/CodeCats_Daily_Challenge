@@ -1,0 +1,92 @@
+155. Min Stack
+
+class MinStack {
+public:
+stack<int> st, minst;
+    MinStack() {
+        
+    }
+    
+    void push(int val) {
+        if(minst.empty() || minst.top()>=val)
+        minst.push(val);
+        st.push(val);
+    }
+    
+    void pop() {
+        if(!minst.empty() && minst.top()==st.top())
+        minst.pop();
+        st.pop();
+        
+    }
+    
+    int top() {
+        return st.top();
+        
+    }
+    
+    int getMin() {
+       return minst.top();
+        
+    }
+};
+
+
+
+
+735. Asteroid Collision
+
+
+
+class Solution {
+public:
+     bool sameParity(int a, int b){
+        if((a<0 && b<0) || (a>0 && b>0)) return true;
+        return false;
+    }
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+//         int n=asteroids.size();
+//         vector<int> ans;
+//         for(int i=0;i<n;i++){
+//             if(ans.empty() || ans.back()<0 || (ans.back()>0 && asteroids[i]>0))
+//             ans.push_back(asteroids[i]);
+//             else{
+//                 while(ans.size()>0 && ans.back()>0 && ans.back()<abs(asteroids[i])) ans.pop_back();
+
+//                 if(ans.empty() || ans.back()<0 )
+//                 ans.push_back(asteroids[i]);
+//                 else if(ans.back()==abs(asteroids[i]))
+//                 ans.pop_back();
+//             }
+//         }
+//        return ans;
+        
+        
+        
+        vector<int> ans;
+       int n=asteroids.size();
+        
+        stack<int> st;
+        
+        for(int i=0;i<n;i++){
+            if(st.size()==0 || sameParity(st.top(),asteroids[i]) || st.top()<0 ){
+                st.push(asteroids[i]); 
+            }else{
+                while(st.size()>0 && st.top()>0 && st.top() < abs(asteroids[i])) st.pop();
+                
+                if(st.size()==0 || st.top()<0){
+                    st.push(asteroids[i]);
+                }else if(st.top() == abs(asteroids[i])){
+                    st.pop();  
+                }
+            }
+        }
+         while(st.size()>0){
+            int x=st.top();
+            ans.push_back(x);
+            st.pop();
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
