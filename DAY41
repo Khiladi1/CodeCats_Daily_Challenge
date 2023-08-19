@@ -1,0 +1,104 @@
+84. Largest Rectangle in Histogram
+
+
+class Solution {
+    private:
+    vector<int> nextSmallerElement(vector<int>arr,int n){
+        stack<int>s;
+        s.push(-1);
+        vector<int>ans(n);
+        for(int i=n-1;i>=0;i--){
+            int curr=arr[i];
+        while(s.top()!=-1&& arr[s.top()]>=curr){
+            s.pop();
+        }
+        ans[i]=s.top();
+        s.push(i);
+        }
+        return ans;
+    }
+     vector<int> prevSmallerElement(vector<int>arr,int n){
+        stack<int>s;
+        s.push(-1);
+        vector<int>ans(n);
+        for(int i=0;i<n;i++){
+            int curr=arr[i];
+        while(s.top()!=-1&&arr[s.top()]>=curr){
+            s.pop();
+        }
+        ans[i]=s.top();
+        s.push(i);
+        }
+        return ans;
+    }
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int n=heights.size();
+        vector<int>next(n);
+        next=nextSmallerElement(heights,n);
+        vector<int>prev(n);
+        prev=prevSmallerElement(heights,n);
+        int area=INT_MIN;
+        for(int i=0;i<n;i++){
+        int length=heights[i];
+        if(next[i]==-1){
+            next[i]=n;
+        }
+        int breadth=next[i]-prev[i]-1;
+        int newArea=length*breadth;
+        area=max(area,newArea);
+        }
+        return area;
+    }
+};
+
+
+
+
+1291. Sequential Digits
+
+
+class Solution {
+public:
+    vector<int> ans;
+    void helper(int curr,int low,  int high, int cd, int hd){
+        if(cd > hd || curr > high){
+            return ;
+        }
+                // cout << curr << endl;
+
+        // if(cd == hd){
+            if(curr <= high && curr >= low){
+                ans.push_back(curr);
+            }
+            // return;
+        // }
+
+        int last = curr%10;
+        if(last == 9){
+            return;
+        }
+        curr = curr*10 + (last+1);
+        helper(curr,low, high, cd+1,hd);
+    }
+
+    vector<int> sequentialDigits(int low, int high) {
+        int dl = 0, dh = 0, n = low , m = high;
+        while(n > 0){
+            n /= 10;
+            dl++;
+        }
+        while(m > 0){
+            m /= 10;
+            dh++;
+        }
+
+        // cout << dl << " " << dh << endl;
+
+        for(int i=1;i<9;i++){
+            helper(i, low, high , 0,dh);
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+};
