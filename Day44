@@ -1,0 +1,60 @@
+1700. Number of Students Unable to Eat Lunch
+
+
+class Solution {
+public:
+    int countStudents(vector<int>& students, vector<int>& sandwiches) {
+        int x=0,y=0,k=0;
+        while(!students.empty())
+        {
+            if(students[0]==sandwiches[0])
+            {
+                sandwiches.erase(sandwiches.begin());
+                students.erase(students.begin());
+                k=0;
+            }
+            else
+            {
+
+                if(k>=students.size()-1) break;
+                k++;
+                int x=students[0];
+                students.erase(students.begin());
+                students.push_back(x);
+            }
+        }
+        return students.size();
+    }
+};
+
+
+
+
+
+950. Reveal Cards In Increasing Order
+
+
+class Solution {
+public:
+    vector<int> deckRevealedIncreasing(vector<int>& deck) {
+        int i;
+        vector<int> ans(deck.size(), 0);
+        sort(deck.begin(), deck.end());
+        queue<int> q;
+
+        for(i=0 ; i<deck.size() ; i++)
+        {
+            q.push(i);
+        }
+
+        for(i=0 ; i<deck.size() ; i++)
+        {
+            ans[q.front()] = deck[i];
+            q.pop();
+            q.push(q.front());
+            q.pop();
+        }
+
+        return ans;
+    }
+};
